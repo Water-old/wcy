@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <title>wcy.nim</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>🐳</text></svg>">
+  <meta content="text/html; charset=utf-8" http-equiv="content-type">
+  <meta content="width=device-width, initial-scale=1" name="viewport">
+  <meta content="nimib 0.3.12" name="generator">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.min.css">
+  <link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/pietroppeter/nimib/assets/atom-one-light.css'>
+    <script src="https://cdn.jsdelivr.net/gh/pietroppeter/nimib@main/assets/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+
+  <style>
+.nb-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nb-small {
+  font-size: 0.8rem;
+}
+button.nb-small {
+  float: right;
+  padding: 2px;
+  padding-right: 5px;
+  padding-left: 5px;
+}
+section#source {
+  display:none
+}
+pre > code {
+  font-size: 1.2em;
+}
+.nb-output {
+  line-height: 1.15;
+}
+figure {
+  margin: 2rem 0;
+}
+figcaption {
+  text-align: center;
+}
+  
+</style>
+  
+</head>
+<body>
+<header>
+<div class="nb-box">
+  <span><a href=".">🏡</a></span>
+  <span><code>wcy.nim</code></span>
+  <span></span>
+</div>
+<hr>
+</header><main>
+<h1>RPN计算器使用说明书</h1>
+<h2>一、安装和编译指南</h2>
+<ol>
+<li><strong>安装C++编译器</strong>：确保系统安装GCC或Clang。</li>
+<li><strong>编译代码</strong>：将代码保存为<code>rpn_calc.cpp</code>，执行<code>g++ -o rpn_calc rpn_calc.cpp</code>生成可执行文件。</li>
+</ol>
+<h2>二、基本使用示例</h2>
+<p>输入RPN表达式（以空格分隔），例如：</p>
+<ul>
+<li><code>3 4 +</code> 计算3+4，结果为7</li>
+<li><code>5 2 - 3 *</code> 计算(5-2)*3，结果为9</li>
+</ul>
+<h2>三、所有支持的操作说明</h2>
+<p>支持四则运算：</p>
+<ul>
+<li>加法（+）：对栈顶两个数做加法</li>
+<li>减法（-）：栈顶第二个数减栈顶数</li>
+<li>乘法（*）：对栈顶两个数做乘法</li>
+<li>除法（/）：栈顶第二个数除以栈顶数（除数不能为0）</li>
+</ul>
+<h2>四、错误代码和异常说明</h2>
+<ul>
+<li>栈为空/元素不足：输入表达式不符合RPN规则，如<code>+ 3</code></li>
+<li>除数为0：输入如<code>4 0 /</code></li>
+<li>无效输入：包含非数字和非运算符的内容，如<code>3 a +</code></li>
+</ul>
+<h2>五、示例输入输出</h2>
+<p>| 输入          | 输出  |
+|---------------|-------|
+| <code>2.5 1.5 +</code>   | 4.0   |
+| <code>10 3 4 + *</code>  | 70    |
+| <code>8 4 / 2 +</code>   | 4     |</p>
+</main>
+<footer>
+<div class="nb-box">
+  <span><span class="nb-small">made with <a href="https://pietroppeter.github.io/nimib/">nimib 🐳</a></span></span>
+  <span></span>
+  <span><button class="nb-small" id="show" onclick="toggleSourceDisplay()">Show Source</button></span>
+</div>
+</footer>
+<section id="source">
+<pre><code class="nohighlight nim hljs"><span class="hljs-keyword">import</span> nimib
+
+nbInit()
+
+nbText: <span class="hljs-string">&quot;&quot;&quot;
+# RPN计算器使用说明书
+ ## 一、安装和编译指南
+ 1. **安装C++编译器**：确保系统安装GCC或Clang。
+ 2. **编译代码**：将代码保存为`rpn_calc.cpp`，执行`g++ -o rpn_calc rpn_calc.cpp`生成可执行文件。
+## 二、基本使用示例
+ 输入RPN表达式（以空格分隔），例如：
+ - `3 4 +` 计算3+4，结果为7
+ - `5 2 - 3 *` 计算(5-2)*3，结果为9
+## 三、所有支持的操作说明
+ 支持四则运算：
+ - 加法（+）：对栈顶两个数做加法
+ - 减法（-）：栈顶第二个数减栈顶数
+ - 乘法（*）：对栈顶两个数做乘法
+ - 除法（/）：栈顶第二个数除以栈顶数（除数不能为0）
+## 四、错误代码和异常说明
+ - 栈为空/元素不足：输入表达式不符合RPN规则，如`+ 3`
+ - 除数为0：输入如`4 0 /`
+ - 无效输入：包含非数字和非运算符的内容，如`3 a +`
+## 五、示例输入输出
+ | 输入          | 输出  |
+ |---------------|-------|
+ | `2.5 1.5 +`   | 4.0   |
+ | `10 3 4 + *`  | 70    |
+ | `8 4 / 2 +`   | 4     |
+&quot;&quot;&quot;</span>
+
+nbSave()
+</code></pre>
+</section><script>
+function toggleSourceDisplay() {
+  var btn = document.getElementById("show")
+  var source = document.getElementById("source");
+  if (btn.innerHTML=="Show Source") {
+    btn.innerHTML = "Hide Source";
+    source.style.display = "block";
+  } else {
+    btn.innerHTML = "Show Source";
+    source.style.display = "none";
+  }
+}
+</script></body>
+</html>
